@@ -2,6 +2,7 @@
 #include <iostream>
 #include "SDL.h"
 #include "snake.h"
+#include "paddle.h"
 
 void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
                                  Snake::Direction opposite) const {
@@ -9,21 +10,38 @@ void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
   return;
 }
 
-void Controller::HandleInput(bool &running, Snake &snake) const {
+void Controller::ChangePaddleDirection(Paddle &paddle, Paddle::Direction input) const {
+  paddle.direction = input;
+  return;
+}
+
+void Controller::HandleInput(bool &running, Snake &snake, Paddle &paddle) const {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
       running = false;
     } else if (e.type == SDL_KEYDOWN) {
       switch (e.key.keysym.sym) {
+        case SDLK_w:
+          std::cout << "PRESSING W \n\n ";
+          // paddle.direction = Paddle::Direction::kUp;
+          ChangePaddleDirection(paddle, Paddle::Direction::kUp);
+          break;
+        case SDLK_s:
+          std::cout << "PRESSING S \n\n ";
+          ChangePaddleDirection(paddle, Paddle::Direction::kDown);
+          break;
+
         case SDLK_UP:
-          ChangeDirection(snake, Snake::Direction::kUp,
-                          Snake::Direction::kDown);
+          // ChangeDirection(snake, Snake::Direction::kUp,
+          //                 Snake::Direction::kDown);
+          ChangePaddleDirection(paddle, Paddle::Direction::kUp);
           break;
 
         case SDLK_DOWN:
-          ChangeDirection(snake, Snake::Direction::kDown,
-                          Snake::Direction::kUp);
+          // ChangeDirection(snake, Snake::Direction::kDown,
+          //                 Snake::Direction::kUp);
+          ChangePaddleDirection(paddle, Paddle::Direction::kDown);
           break;
 
         case SDLK_LEFT:
@@ -36,6 +54,9 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
                           Snake::Direction::kLeft);
           break;
       }
+    } else if (e.type == SDL_KEYUP) {
+      // No key pressed
+      ChangePaddleDirection(paddle, Paddle::Direction::still);
     }
   }
 }

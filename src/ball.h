@@ -13,9 +13,9 @@ class Ball {
         position_x(grid_width /3),
         position_y(grid_height / 2){};
 
-  void UpdateBall();
+  void UpdateBall(int newLeftX, int newLeftY, int newRightX, int newRightY);
 
-  float speed{0.3f};
+  float speed{0.2f};
 
   float position_x;
   float position_y;

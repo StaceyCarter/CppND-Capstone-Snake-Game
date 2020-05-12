@@ -18,7 +18,7 @@ class Paddle {
 
   Direction direction = Direction::still;
 
-  float speed{0.2f};
+  float speed{0.3f};
   int size{1};
   bool alive{true};
   float position_x;

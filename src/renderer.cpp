@@ -56,7 +56,7 @@ void Renderer::Render(Ball const &ball, Paddle const paddleLeft, Paddle const pa
   block.y = ball.position_y * cell_size;
   SDL_RenderFillRect(sdl_renderer, &block);
 
-  block.h = cell_size * 3;
+  block.h = cell_size * 4;
   //Render paddle
   block.x = static_cast<int>(paddleLeft.position_x) * cell_size;
   block.y = static_cast<int>(paddleLeft.position_y) * cell_size;

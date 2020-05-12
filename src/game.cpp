@@ -74,20 +74,15 @@ void Game::Update() {
 
   paddleRight.UpdatePaddle();
   paddleLeft.UpdatePaddle();
-  ball.UpdateBall();
+
+  int newleft_x = static_cast<int>(paddleLeft.position_x);
+  int newleft_y = static_cast<int>(paddleLeft.position_y);
+
+  int newRight_x = static_cast<int>(paddleRight.position_x);
+  int newRight_y = static_cast<int>(paddleRight.position_y);
+
+  ball.UpdateBall(newleft_x, newleft_y, newRight_x, newRight_y);
   
-
-  // int new_x = static_cast<int>(snake.head_x);
-  // int new_y = static_cast<int>(snake.head_y);
-
-  // Check if there's food over here
-  // if (food.x == new_x && food.y == new_y) {
-  //   score++;
-  //   PlaceFood();
-  //   // Grow snake and increase speed.
-  //   snake.GrowBody();
-  //   snake.speed += 0.02;
-  // }
 }
 
 int Game::GetScore() const { return score; }

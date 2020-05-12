@@ -14,8 +14,8 @@ void Paddle::UpdatePaddle() {
       break;
 
     case Direction::kDown:
-      if (position_y + speed > (grid_height -3)){
-        position_y = grid_height - 3;
+      if (position_y + speed > (grid_height -4)){
+        position_y = grid_height - 4;
       } else {
         position_y += speed;
       }

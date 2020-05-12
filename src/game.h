@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "snake.h"
 #include "paddle.h"
+#include "ball.h"
 
 class Game {
  public:
@@ -21,6 +22,7 @@ class Game {
   SDL_Point food;
   Paddle paddleLeft;
   Paddle paddleRight;
+  Ball ball;
 
   std::random_device dev;
   std::mt19937 engine;

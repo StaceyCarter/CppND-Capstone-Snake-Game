@@ -2,12 +2,8 @@
 #include <cmath>
 #include <iostream>
 
-void Paddle::UpdatePaddle() {
-  UpdatePosition();
-}
 
-void Paddle::UpdatePosition() {
-  std::cout << "POSITION Y: " << position_y << "\n";
+void Paddle::UpdatePaddle() {
   switch (direction) {
     case Direction::kUp:
       if (position_y - speed < 0){
@@ -18,7 +14,6 @@ void Paddle::UpdatePosition() {
       break;
 
     case Direction::kDown:
-      std::cout << "GRID HEIGHT: " << grid_height << "\n";
       if (position_y + speed > (grid_height -3)){
         position_y = grid_height - 3;
       } else {
@@ -32,16 +27,3 @@ void Paddle::UpdatePosition() {
         break;
   }
 }
-
-// // Inefficient method to check if cell is occupied by snake.
-// bool Snake::SnakeCell(int x, int y) {
-//   if (x == static_cast<int>(head_x) && y == static_cast<int>(head_y)) {
-//     return true;
-//   }
-//   for (auto const &item : body) {
-//     if (x == item.x && y == item.y) {
-//       return true;
-//     }
-//   }
-//   return false;
-// }

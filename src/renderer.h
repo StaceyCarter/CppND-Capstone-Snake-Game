@@ -5,6 +5,7 @@
 #include "SDL.h"
 #include "snake.h"
 #include "paddle.h"
+#include "ball.h"
 
 class Renderer {
  public:
@@ -12,7 +13,7 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(SDL_Point const &food, Paddle const paddlLeft, Paddle const right);
+  void Render(Ball const &ball, Paddle const paddlLeft, Paddle const right);
   void UpdateWindowTitle(int score, int fps);
 
  private:

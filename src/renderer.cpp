@@ -40,11 +40,11 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(SDL_Point const &food, Paddle const paddleLeft, Paddle const paddleRight) {
+void Renderer::Render(Ball const &ball, Paddle const paddleLeft, Paddle const paddleRight) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   int cell_size = screen_height / grid_height;
-
+  block.h = cell_size;
 
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
@@ -52,8 +52,8 @@ void Renderer::Render(SDL_Point const &food, Paddle const paddleLeft, Paddle con
 
   // Render food
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
-  block.x = food.x * block.w;
-  block.y = food.y * block.h;
+  block.x = ball.position_x * cell_size;
+  block.y = ball.position_y * cell_size;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   block.h = cell_size * 3;

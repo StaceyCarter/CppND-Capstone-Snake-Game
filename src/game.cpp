@@ -7,7 +7,7 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
       paddleRight(grid_width, grid_height, 1),
       paddleLeft(grid_width, grid_height, 0),
-      
+      ball(grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width)),
       random_h(0, static_cast<int>(grid_height)) {
@@ -29,7 +29,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, paddleLeft, paddleRight);
     Update();
-    renderer.Render(food, paddleLeft, paddleRight);
+    renderer.Render(ball, paddleLeft, paddleRight);
 
     frame_end = SDL_GetTicks();
 
@@ -74,6 +74,7 @@ void Game::Update() {
 
   paddleRight.UpdatePaddle();
   paddleLeft.UpdatePaddle();
+  ball.UpdateBall();
   
 
   // int new_x = static_cast<int>(snake.head_x);

@@ -15,8 +15,10 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
 
+  std::cout << "SCREEEN SIZE IS: " << screen_height;
+
   // Create Window
-  sdl_window = SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
+  sdl_window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_CENTERED,
                                 SDL_WINDOWPOS_CENTERED, screen_width,
                                 screen_height, SDL_WINDOW_SHOWN);
 
@@ -38,10 +40,11 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SDL_Point const &food, Paddle const paddle) {
+void Renderer::Render(SDL_Point const &food, Paddle const paddleLeft, Paddle const paddleRight) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
-  block.h = screen_height / grid_height;
+  int cell_size = screen_height / grid_height;
+
 
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
@@ -53,30 +56,19 @@ void Renderer::Render(Snake const snake, SDL_Point const &food, Paddle const pad
   block.y = food.y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
-  // Render snake's body
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-  for (SDL_Point const &point : snake.body) {
-    block.x = point.x * block.w;
-    block.y = point.y * block.h;
-    SDL_RenderFillRect(sdl_renderer, &block);
-  }
-
-  // Render snake's head
-  block.x = static_cast<int>(snake.head_x) * block.w;
-  block.y = static_cast<int>(snake.head_y) * block.h;
-  if (snake.alive) {
-    SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
-  } else {
-    SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
-  }
-  SDL_RenderFillRect(sdl_renderer, &block);
-
+  block.h = cell_size * 3;
   //Render paddle
-  block.x = static_cast<int>(paddle.position_x) * block.w;
-  block.y = static_cast<int>(paddle.position_y) * block.h;
+  block.x = static_cast<int>(paddleLeft.position_x) * cell_size;
+  block.y = static_cast<int>(paddleLeft.position_y) * cell_size;
+ 
   SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
   SDL_RenderFillRect(sdl_renderer, &block);
 
+  // Render right paddel
+  block.x = static_cast<int>(paddleRight.position_x) * cell_size;
+  block.y = static_cast<int>(paddleRight.position_y) * cell_size;
+  SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
+  SDL_RenderFillRect(sdl_renderer, &block);
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer);

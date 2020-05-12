@@ -15,7 +15,7 @@ void Controller::ChangePaddleDirection(Paddle &paddle, Paddle::Direction input) 
   return;
 }
 
-void Controller::HandleInput(bool &running, Snake &snake, Paddle &paddle) const {
+void Controller::HandleInput(bool &running, Paddle &paddleLeft, Paddle &paddleRight) const {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
@@ -23,40 +23,32 @@ void Controller::HandleInput(bool &running, Snake &snake, Paddle &paddle) const 
     } else if (e.type == SDL_KEYDOWN) {
       switch (e.key.keysym.sym) {
         case SDLK_w:
-          std::cout << "PRESSING W \n\n ";
-          // paddle.direction = Paddle::Direction::kUp;
-          ChangePaddleDirection(paddle, Paddle::Direction::kUp);
+          ChangePaddleDirection(paddleLeft, Paddle::Direction::kUp);
           break;
         case SDLK_s:
-          std::cout << "PRESSING S \n\n ";
-          ChangePaddleDirection(paddle, Paddle::Direction::kDown);
+          ChangePaddleDirection(paddleLeft, Paddle::Direction::kDown);
           break;
 
         case SDLK_UP:
-          // ChangeDirection(snake, Snake::Direction::kUp,
-          //                 Snake::Direction::kDown);
-          ChangePaddleDirection(paddle, Paddle::Direction::kUp);
+          ChangePaddleDirection(paddleRight, Paddle::Direction::kUp);
           break;
 
         case SDLK_DOWN:
-          // ChangeDirection(snake, Snake::Direction::kDown,
-          //                 Snake::Direction::kUp);
-          ChangePaddleDirection(paddle, Paddle::Direction::kDown);
+          ChangePaddleDirection(paddleRight, Paddle::Direction::kDown);
           break;
 
-        case SDLK_LEFT:
-          ChangeDirection(snake, Snake::Direction::kLeft,
-                          Snake::Direction::kRight);
-          break;
-
-        case SDLK_RIGHT:
-          ChangeDirection(snake, Snake::Direction::kRight,
-                          Snake::Direction::kLeft);
-          break;
       }
     } else if (e.type == SDL_KEYUP) {
-      // No key pressed
-      ChangePaddleDirection(paddle, Paddle::Direction::still);
+      switch (e.key.keysym.sym) {
+        case SDLK_s:
+        case SDLK_w:
+          ChangePaddleDirection(paddleLeft, Paddle::Direction::still);
+          break;
+        case SDLK_UP:
+        case SDLK_DOWN:
+          ChangePaddleDirection(paddleRight, Paddle::Direction::still);
+          break;
+      }
     }
   }
 }

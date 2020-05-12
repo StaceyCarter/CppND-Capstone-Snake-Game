@@ -19,7 +19,8 @@ class Game {
  private:
   Snake snake;
   SDL_Point food;
-  Paddle paddle;
+  Paddle paddleLeft;
+  Paddle paddleRight;
 
   std::random_device dev;
   std::mt19937 engine;

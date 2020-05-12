@@ -7,14 +7,24 @@ void Paddle::UpdatePaddle() {
 }
 
 void Paddle::UpdatePosition() {
+  std::cout << "POSITION Y: " << position_y << "\n";
   switch (direction) {
     case Direction::kUp:
-      std::cout << "MOVING UP \n\n";
-      position_y -= speed;
+      if (position_y - speed < 0){
+        position_y = 0;
+      } else {
+        position_y -= speed;
+      }
       break;
 
     case Direction::kDown:
-      position_y += speed;
+      std::cout << "GRID HEIGHT: " << grid_height << "\n";
+      if (position_y + speed > (grid_height -3)){
+        position_y = grid_height - 3;
+      } else {
+        position_y += speed;
+      }
+    
       break;
 
     case Direction::still:

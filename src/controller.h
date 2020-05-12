@@ -6,7 +6,7 @@
 
 class Controller {
  public:
-  void HandleInput(bool &running, Snake &snake, Paddle &paddle) const;
+  void HandleInput(bool &running, Paddle &paddleLeft, Paddle &paddleRight) const;
 
  private:
   void ChangeDirection(Snake &snake, Snake::Direction input,

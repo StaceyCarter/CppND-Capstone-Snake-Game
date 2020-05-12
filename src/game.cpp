@@ -40,7 +40,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(scoreLeft, scoreRight, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -75,15 +75,20 @@ void Game::Update() {
   paddleRight.UpdatePaddle();
   paddleLeft.UpdatePaddle();
 
-  int newleft_x = static_cast<int>(paddleLeft.position_x);
-  int newleft_y = static_cast<int>(paddleLeft.position_y);
 
-  int newRight_x = static_cast<int>(paddleRight.position_x);
+  int newleft_y = static_cast<int>(paddleLeft.position_y);
   int newRight_y = static_cast<int>(paddleRight.position_y);
 
-  ball.UpdateBall(newleft_x, newleft_y, newRight_x, newRight_y);
-  
+  Ball::Hit hit = ball.UpdateBall(newleft_y, newRight_y);
+
+  if (hit == Ball::Hit::hitLeft){
+    scoreRight += 1;
+  }
+  if (hit == Ball::Hit::hitRight){
+    scoreLeft += 1;
+  }
+
 }
 
-int Game::GetScore() const { return score; }
-int Game::GetSize() const { return snake.size; }
+int Game::GetScoreLeft() const { return scoreLeft; }
+int Game::GetScoreRight() const { return scoreRight; }

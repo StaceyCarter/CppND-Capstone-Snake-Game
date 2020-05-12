@@ -74,7 +74,7 @@ void Renderer::Render(Ball const &ball, Paddle const paddleLeft, Paddle const pa
   SDL_RenderPresent(sdl_renderer);
 }
 
-void Renderer::UpdateWindowTitle(int score, int fps) {
-  std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
+void Renderer::UpdateWindowTitle(int scoreLeft, int scoreRight, int fps) {
+  std::string title{"Left: " + std::to_string(scoreLeft) + " Right: " + std::to_string(scoreRight) + " FPS: " + std::to_string(fps)};
   SDL_SetWindowTitle(sdl_window, title.c_str());
 }

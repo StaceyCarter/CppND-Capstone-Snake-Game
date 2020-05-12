@@ -14,7 +14,7 @@ class Renderer {
   ~Renderer();
 
   void Render(Ball const &ball, Paddle const paddlLeft, Paddle const right);
-  void UpdateWindowTitle(int score, int fps);
+  void UpdateWindowTitle(int scoreLeft, int scoreRight, int fps);
 
  private:
   SDL_Window *sdl_window;

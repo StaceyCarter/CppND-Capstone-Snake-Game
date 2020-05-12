@@ -17,7 +17,17 @@ int main() {
   Game game(kGridWidth, kGridHeight);
   game.Run(controller, renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
-  std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
+  std::cout << "Left paddle score: " << game.GetScoreLeft() << "\n";
+  std::cout << "Right paddle score: " << game.GetScoreRight() << "\n";
+
+  if (game.GetScoreLeft() == game.GetScoreRight()){
+    std::cout << "Tie! \n";
+  } else if (game.GetScoreLeft() > game.GetScoreRight()){
+    std::cout << "Left wins! \n";
+  } else {
+    std::cout << "Right wins! \n";
+  }
+
+
   return 0;
 }

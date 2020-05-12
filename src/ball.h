@@ -6,6 +6,7 @@
 
 class Ball {
  public:
+  enum class Hit { hitLeft, hitRight, hitNone};
 
   Ball(int grid_width, int grid_height)
       : grid_width(grid_width),
@@ -13,7 +14,7 @@ class Ball {
         position_x(grid_width /3),
         position_y(grid_height / 2){};
 
-  void UpdateBall(int newLeftX, int newLeftY, int newRightX, int newRightY);
+  Hit UpdateBall(int newLeftY, int newRightY);
 
   float speed{0.2f};
 

@@ -1,10 +1,10 @@
 # CPPND: Pong Game Capstone Project
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
-
 This is my Capstone project for the Udacity C++ nanodegree. It is a clone of the game Pong. The player on the left uses "w" and "s" keys to control their paddle and the player on the right uses the up and down arrows to control their paddle. 
 
 If either player fails to hit the ball with their paddle and it hits their wall, the other player gets a point. Players can continue to play as long as they want. The final scores & winner will print to the console when they exit out of the game.
+
+[![Image from Gyazo](https://i.gyazo.com/f7948b029a95be77246efa8f412af5bc.gif)](https://gyazo.com/f7948b029a95be77246efa8f412af5bc)
 
 ## Files include: 
 * ball.cpp & ball.h: The ball class which keeps track of the current position and velocity of the ball. 

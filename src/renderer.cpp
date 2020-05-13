@@ -15,8 +15,6 @@ Renderer::Renderer(const std::size_t screen_width,
     std::cerr << "SDL_Error: " << SDL_GetError() << "\n";
   }
 
-  std::cout << "SCREEEN SIZE IS: " << screen_height;
-
   // Create Window
   sdl_window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_CENTERED,
                                 SDL_WINDOWPOS_CENTERED, screen_width,

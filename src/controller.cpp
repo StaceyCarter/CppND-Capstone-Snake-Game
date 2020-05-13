@@ -1,14 +1,8 @@
 #include "controller.h"
 #include <iostream>
 #include "SDL.h"
-#include "snake.h"
 #include "paddle.h"
 
-void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
-                                 Snake::Direction opposite) const {
-  if (snake.direction != opposite || snake.size == 1) snake.direction = input;
-  return;
-}
 
 void Controller::ChangePaddleDirection(Paddle &paddle, Paddle::Direction input) const {
   paddle.direction = input;

@@ -4,15 +4,11 @@
 #include "paddle.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
+    : 
       paddleRight(grid_width, grid_height, 1),
       paddleLeft(grid_width, grid_height, 0),
-      ball(grid_width, grid_height),
-      engine(dev()),
-      random_w(0, static_cast<int>(grid_width)),
-      random_h(0, static_cast<int>(grid_height)) {
-  PlaceFood();
-}
+      ball(grid_width, grid_height){}
+   
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
@@ -54,27 +50,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   }
 }
 
-void Game::PlaceFood() {
-  int x, y;
-  while (true) {
-    x = random_w(engine);
-    y = random_h(engine);
-    // Check that the location is not occupied by a snake item before placing
-    // food.
-    if (!snake.SnakeCell(x, y)) {
-      food.x = x;
-      food.y = y;
-      return;
-    }
-  }
-}
-
 void Game::Update() {
-  if (!snake.alive) return;
-
   paddleRight.UpdatePaddle();
   paddleLeft.UpdatePaddle();
-
 
   int newleft_y = static_cast<int>(paddleLeft.position_y);
   int newRight_y = static_cast<int>(paddleRight.position_y);
@@ -87,7 +65,6 @@ void Game::Update() {
   if (hit == Ball::Hit::hitRight){
     scoreLeft += 1;
   }
-
 }
 
 int Game::GetScoreLeft() const { return scoreLeft; }

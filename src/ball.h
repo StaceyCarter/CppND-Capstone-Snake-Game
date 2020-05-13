@@ -16,17 +16,18 @@ class Ball {
 
   Hit UpdateBall(int newLeftY, int newRightY);
 
-  float speed{0.2f};
-
   float position_x;
   float position_y;
-  float y_velocity{speed};
-  float x_velocity{speed};
 
  private:
   void UpdatePosition();
   int grid_width;
   int grid_height;
+
+  float speed{0.2f};
+
+  float y_velocity{speed};
+  float x_velocity{speed};
 };
 
 #endif

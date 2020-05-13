@@ -5,7 +5,6 @@
 #include "SDL.h"
 #include "controller.h"
 #include "renderer.h"
-#include "snake.h"
 #include "paddle.h"
 #include "ball.h"
 
@@ -18,21 +17,13 @@ class Game {
   int GetScoreRight() const;
 
  private:
-  Snake snake;
-  SDL_Point food;
   Paddle paddleLeft;
   Paddle paddleRight;
   Ball ball;
 
-  std::random_device dev;
-  std::mt19937 engine;
-  std::uniform_int_distribution<int> random_w;
-  std::uniform_int_distribution<int> random_h;
-
   int scoreLeft{0};
   int scoreRight{0};
 
-  void PlaceFood();
   void Update();
 };
 
